@@ -1,0 +1,6 @@
+{
+  "name": "Subahan Fashion",
+  "description": "Subahan Fashion (সুবাহান ফ্যাশন) - Modern Bangladeshi e-commerce shopping app with BDT pricing, local delivery, and mobile admin dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

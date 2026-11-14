@@ -1,0 +1,317 @@
+{
+  "entities": {
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Authorized admin identity record.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Admin Firebase Auth UID" },
+        "email": { "type": "string", "description": "Admin email address" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp on creation" }
+      },
+      "required": ["uid", "email", "createdAt"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Catalog product item sold on Subahan Fashion.",
+      "type": "object",
+      "properties": {
+        "sku": { "type": "string", "description": "Unique product SKU or code" },
+        "name": { "type": "string", "description": "Product name in English" },
+        "nameBn": { "type": "string", "description": "Product name in Bangla" },
+        "description": { "type": "string", "description": "Short product description" },
+        "details": { "type": "string", "description": "Detailed specifications" },
+        "categoryId": { "type": "string", "description": "Category ID" },
+        "categoryName": { "type": "string", "description": "Display category name" },
+        "price": { "type": "number", "description": "Current selling price in BDT" },
+        "previousPrice": { "type": "number", "description": "Previous/MRP price in BDT" },
+        "discountPercent": { "type": "integer", "description": "Discount percentage 0-95" },
+        "stockQuantity": { "type": "integer", "description": "Available stock count" },
+        "colors": { "type": "array", "description": "Available color variants (max 15)" },
+        "sizes": { "type": "array", "description": "Available size variants (max 15)" },
+        "imageUrls": { "type": "array", "description": "Product images (max 6)" },
+        "videoUrl": { "type": "string", "description": "Optional product video URL" },
+        "deliveryChargeOverride": { "type": "number", "description": "Special delivery charge (-1 for default)" },
+        "weightKg": { "type": "number", "description": "Product weight in kg" },
+        "isPublished": { "type": "boolean", "description": "Visibility in customer store" },
+        "isFeatured": { "type": "boolean", "description": "Featured badge" },
+        "isBestSelling": { "type": "boolean", "description": "Best selling badge" },
+        "isNewArrival": { "type": "boolean", "description": "New arrival badge" },
+        "isFlashSale": { "type": "boolean", "description": "Flash sale eligibility" },
+        "isChoiceDay": { "type": "boolean", "description": "Choice Day special offer" },
+        "isBundleEligible": { "type": "boolean", "description": "Buy 2/3 bundle eligibility" },
+        "soldCount": { "type": "integer", "description": "Total units sold" },
+        "ratingAvg": { "type": "number", "description": "Average star rating" },
+        "reviewCount": { "type": "integer", "description": "Number of customer reviews" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": ["sku", "name", "categoryId", "price", "stockQuantity", "isPublished", "createdAt", "updatedAt"]
+    },
+    "ProductCost": {
+      "title": "ProductCost",
+      "description": "Admin-only wholesale cost price for profit calculation.",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string", "description": "Associated product ID" },
+        "costPrice": { "type": "number", "description": "Wholesale cost in BDT" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": ["productId", "costPrice", "updatedAt"]
+    },
+    "ProductReview": {
+      "title": "ProductReview",
+      "description": "Customer review and rating on a product.",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "rating": { "type": "integer" },
+        "comment": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["productId", "userId", "userName", "rating", "comment", "createdAt", "updatedAt"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product category supporting Bangla and English labels.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "nameBn": { "type": "string" },
+        "iconKey": { "type": "string" },
+        "sortOrder": { "type": "integer" },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "nameBn", "isActive", "createdAt", "updatedAt"]
+    },
+    "StoreConfig": {
+      "title": "StoreConfig",
+      "description": "Storewide delivery charges, payment methods, promotions, and business details.",
+      "type": "object",
+      "properties": {
+        "isPublicConfig": { "type": "boolean" },
+        "insideBoguraCharge": { "type": "number" },
+        "outsideBoguraCharge": { "type": "number" },
+        "insideDhakaCharge": { "type": "number" },
+        "outsideDhakaCharge": { "type": "number" },
+        "nationwideCharge": { "type": "number" },
+        "perKgExtraCharge": { "type": "number" },
+        "perExtraItemCharge": { "type": "number" },
+        "freeDeliveryMinOrder": { "type": "number" },
+        "freeDeliveryActive": { "type": "boolean" },
+        "codEnabled": { "type": "boolean" },
+        "bkashEnabled": { "type": "boolean" },
+        "bkashNumber": { "type": "string" },
+        "nagadEnabled": { "type": "boolean" },
+        "nagadNumber": { "type": "string" },
+        "rocketEnabled": { "type": "boolean" },
+        "rocketNumber": { "type": "string" },
+        "bankEnabled": { "type": "boolean" },
+        "bankDetails": { "type": "string" },
+        "businessName": { "type": "string" },
+        "businessNameBn": { "type": "string" },
+        "location": { "type": "string" },
+        "contactPhone": { "type": "string" },
+        "facebookUrl": { "type": "string" },
+        "whatsappNumber": { "type": "string" },
+        "aboutUs": { "type": "string" },
+        "privacyPolicy": { "type": "string" },
+        "returnPolicy": { "type": "string" },
+        "deliveryPolicy": { "type": "string" },
+        "flashSaleTitle": { "type": "string" },
+        "flashSaleActive": { "type": "boolean" },
+        "flashSaleDurationHours": { "type": "integer" },
+        "buy2DiscountPercent": { "type": "integer" },
+        "buy3DiscountPercent": { "type": "integer" },
+        "newCustomerDiscountPercent": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["isPublicConfig", "insideBoguraCharge", "outsideBoguraCharge", "insideDhakaCharge", "outsideDhakaCharge", "nationwideCharge", "codEnabled", "createdAt", "updatedAt"]
+    },
+    "Coupon": {
+      "title": "Coupon",
+      "description": "Promotional discount coupon code.",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "discountType": { "type": "string", "enum": ["PERCENT", "FIXED"] },
+        "discountValue": { "type": "number" },
+        "minOrderAmount": { "type": "number" },
+        "maxDiscountAmount": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["code", "discountType", "discountValue", "isActive", "createdAt", "updatedAt"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Customer profile and saved delivery address.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "altPhone": { "type": "string" },
+        "defaultAddress": { "type": "string" },
+        "division": { "type": "string" },
+        "district": { "type": "string" },
+        "upazila": { "type": "string" },
+        "deliveryArea": { "type": "string" },
+        "languagePref": { "type": "string", "enum": ["bn", "en"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "displayName", "createdAt", "updatedAt"]
+    },
+    "CartItem": {
+      "title": "CartItem",
+      "description": "Shopping cart line item under a customer's user document.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "productId": { "type": "string" },
+        "productName": { "type": "string" },
+        "productNameBn": { "type": "string" },
+        "sku": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "unitPrice": { "type": "number" },
+        "previousPrice": { "type": "number" },
+        "quantity": { "type": "integer" },
+        "selectedColor": { "type": "string" },
+        "selectedSize": { "type": "string" },
+        "deliveryChargeOverride": { "type": "number" },
+        "weightKg": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "productId", "productName", "unitPrice", "quantity", "createdAt", "updatedAt"]
+    },
+    "WishlistItem": {
+      "title": "WishlistItem",
+      "description": "Customer saved wishlist item.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "productId": { "type": "string" },
+        "productName": { "type": "string" },
+        "productNameBn": { "type": "string" },
+        "price": { "type": "number" },
+        "previousPrice": { "type": "number" },
+        "imageUrl": { "type": "string" },
+        "categoryName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "productId", "productName", "price", "createdAt", "updatedAt"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order record.",
+      "type": "object",
+      "properties": {
+        "orderNumber": { "type": "string" },
+        "userId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "mobileNumber": { "type": "string" },
+        "altMobileNumber": { "type": "string" },
+        "fullAddress": { "type": "string" },
+        "division": { "type": "string" },
+        "district": { "type": "string" },
+        "upazila": { "type": "string" },
+        "deliveryArea": { "type": "string" },
+        "orderNote": { "type": "string" },
+        "paymentMethod": { "type": "string", "enum": ["COD", "BKASH", "NAGAD", "ROCKET", "BANK"] },
+        "transactionId": { "type": "string" },
+        "senderPhone": { "type": "string" },
+        "itemsSummary": { "type": "string" },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "deliveryCharge": { "type": "number" },
+        "discountAmount": { "type": "number" },
+        "couponCode": { "type": "string" },
+        "totalAmount": { "type": "number" },
+        "totalCost": { "type": "number" },
+        "status": { "type": "string", "enum": ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled", "Returned"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orderNumber", "userId", "customerName", "mobileNumber", "fullAddress", "deliveryArea", "paymentMethod", "items", "subtotal", "deliveryCharge", "discountAmount", "totalAmount", "status", "createdAt", "updatedAt"]
+    },
+    "NotificationItem": {
+      "title": "NotificationItem",
+      "description": "In-app notification for offers, new products, and order status updates.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "titleBn": { "type": "string" },
+        "message": { "type": "string" },
+        "messageBn": { "type": "string" },
+        "type": { "type": "string", "enum": ["PROMO", "NEW_PRODUCT", "ORDER_UPDATE", "DISCOUNT"] },
+        "targetId": { "type": "string" },
+        "isRead": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "message", "type", "isRead", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/admins/{uid}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Authorized admin UIDs."
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Storefront products catalog."
+    },
+    "/product_costs/{productId}": {
+      "schema": { "$ref": "#/entities/ProductCost" },
+      "description": "Admin-only wholesale cost prices."
+    },
+    "/products/{productId}/reviews/{reviewId}": {
+      "schema": { "$ref": "#/entities/ProductReview" },
+      "description": "Customer product reviews and ratings."
+    },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Product categories."
+    },
+    "/store_config/{configId}": {
+      "schema": { "$ref": "#/entities/StoreConfig" },
+      "description": "Delivery charges, payment methods, business info, and promo banners."
+    },
+    "/coupons/{couponId}": {
+      "schema": { "$ref": "#/entities/Coupon" },
+      "description": "Discount coupon codes."
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Customer profile and saved delivery addresses."
+    },
+    "/users/{userId}/cart/{itemId}": {
+      "schema": { "$ref": "#/entities/CartItem" },
+      "description": "Customer shopping cart items."
+    },
+    "/users/{userId}/wishlist/{itemId}": {
+      "schema": { "$ref": "#/entities/WishlistItem" },
+      "description": "Customer wishlist items."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Customer orders and statuses."
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/NotificationItem" },
+      "description": "Customer and broadcast notifications."
+    }
+  }
+}
